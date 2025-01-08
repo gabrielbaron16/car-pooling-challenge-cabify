@@ -16,7 +16,7 @@ build:
     - make build
   artifacts:
     paths:
-      - target/bin/car-pooling-server
+      - target/bin/carpool
 
 dockerize:
   stage: docker
