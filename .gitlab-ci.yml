@@ -6,12 +6,13 @@ stages:
 
 build:
   stage: build
-  image: golang:1.16
+  image: golang:1.23.4
   artifacts:
     paths:
-      - target/bin/carpool
+      - target/bin/car-pooling-server
   script:
-    make build
+    - swagger generate server -f ./swagger.yml --exclude-main
+    - make build
 
 dockerize:
   stage: docker

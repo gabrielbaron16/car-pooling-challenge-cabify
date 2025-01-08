@@ -5,3 +5,8 @@ type Journey struct {
 	Passengers uint `json:"passengers"`
 	AssignedTo *Car `json:"assignedTo"`
 }
+
+type PendingOrderedMap struct {
+	Journeys map[uint]*Journey
+	Ids      []uint
+}

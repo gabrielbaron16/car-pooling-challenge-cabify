@@ -1,0 +1,125 @@
+swagger: "2.0"
+info:
+  description: "This is a sample server for car pooling."
+  version: "1.0.0"
+  title: "Car Pooling"
+basePath: "/"
+schemes:
+  - "http"
+paths:
+  /status:
+    get:
+      summary: "Get status"
+      description: "Get the status of the service"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: "string"
+            example: '{"status":"ok"}'
+  /cars:
+    put:
+      summary: "Add cars"
+      description: "Add a list of cars"
+      parameters:
+        - in: "body"
+          name: "cars"
+          description: "List of cars"
+          required: true
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/car"
+      responses:
+        200:
+          description: "OK"
+        400:
+          description: "Failure in the request format or the payload can't be unmarshalled"
+        500:
+          description: "Internal Server Error"
+  /journey:
+    post:
+      summary: "Add a journey"
+      description: "Add a new journey"
+      parameters:
+        - in: "body"
+          name: "journey"
+          description: "Journey details"
+          required: true
+          schema:
+            $ref: "#/definitions/journey"
+      responses:
+        202:
+          description: "Accepted"
+        400:
+          description: "Bad Request"
+        500:
+          description: "Failure in the request format or the payload can't be unmarshalled"
+  /dropoff/{journey_id}:
+    post:
+      summary: "Drop off passengers"
+      description: "Drop off passengers from a journey"
+      parameters:
+        - in: "path"
+          name: "journey_id"
+          description: "Journey ID"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        204:
+          description: "The group is unregistered correctly"
+        400:
+          description: "Failure in the request format or the payload can't be unmarshalled"
+        404:
+          description: "Not Found"
+        500:
+          description: "Internal Server Error"
+  /locate/{journey_id}:
+    post:
+      summary: "Locate a journey"
+      description: "Locate a car assigned to a journey"
+      parameters:
+        - in: "path"
+          name: "journey_id"
+          description: "Journey ID"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/car"
+        204:
+          description: "The group is waiting to be assigned to a car"
+        400:
+          description: "Failure in the request format or the payload can't be unmarshalled"
+        404:
+          description: "Not Found"
+        500:
+          description: "Internal Server Error"
+definitions:
+  car:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+        minimum: 0
+      seats:
+        type: "integer"
+        format: "int32"
+        minimum: 4
+        maximum: 6
+  journey:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      people:
+        type: "integer"
+        format: "int32"
+        minimum: 1
+        maximum: 6

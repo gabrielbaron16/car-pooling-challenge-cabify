@@ -4,7 +4,7 @@
 
 Take over the design/implementation of a system to manage car pooling.
 
-At Cabify we provide the service of taking people from point A to point B. So far we have done it without sharing cars with multiple groups of people. This is an opportunity to optimize the use of resources by introducing car pooling.
+At Cabify we provide the service of taking people from point A to point B. So far we have done it without sharing Cars with multiple groups of people. This is an opportunity to optimize the use of resources by introducing car pooling.
 
 The job was assigned to a team and they have implemented what could be the first prototype. However, we are not very satisfied with their result. The code seems not to reach the quality standards we expect from our engineers. And as soon as the QA team has enabled their acceptance tests suite, the solution shows that it doesn't even work according to the specs.
 
@@ -12,11 +12,11 @@ Now it is your turn to take the baton, assuming the ownership of this prototype.
 
 ## Car Pooling Service
 
-The Car Pooling service is aimed to track the availability of our pool of cars.
+The Car Pooling service is aimed to track the availability of our pool of Cars.
 
 Cars have a different amount of seats available, they can accommodate groups of up to 4, 5 or 6 people.
 
-Users request cars in groups of 1 to 6. People in the same group want to ride on the same car. You can take any group at any car that has enough empty seats for them. If it's not possible to accommodate them, they're willing to wait until there's a car available for them. Once a car is available for a group that is waiting, they should ride. 
+Users request Cars in groups of 1 to 6. People in the same group want to ride on the same car. You can take any group at any car that has enough empty seats for them. If it's not possible to accommodate them, they're willing to wait until there's a car available for them. Once a car is available for a group that is waiting, they should ride. 
 
 Once they get a car assigned, they will journey until the drop off, you cannot ask them to take another car (i.e. you cannot swap them to another car to make space for another group).
 

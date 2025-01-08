@@ -2,13 +2,13 @@
 
 ## Introduction 
 
-This service implements a Car Pooling service. 
+This service implements a car pooling service. 
 
-The Car Pooling service implements a very simple API that can be used to track the assignment of cars to journeys according to the seat capacity of the cars and the number of people that will travel in each journey.
+The car Pooling service implements a very simple API that can be used to track the assignment of cars to Journeys according to the seat capacity of the Cars and the number of people that will travel in each journey.
 
 Cars can have 4, 5 or 6 seats.
 
-People request journeys in groups of 1 to 6. People in the same group want to ride on the same car. You can take any group at any car that has enough empty seats for them, no matter their current location. If it's not possible to accommodate them, they're willing to wait until there is a car available for them. Once a car is available for a group that is waiting, they should ride.
+People request Journeys in groups of 1 to 6. People in the same group want to ride on the same car. You can take any group at any car that has enough empty seats for them, no matter their current location. If it's not possible to accommodate them, they're willing to wait until there is a car available for them. Once a car is available for a group that is waiting, they should ride.
 
 Once they get a car assigned, they will journey until the drop off, you cannot ask them to take another car (i.e. you cannot swap them to another car to make space for another group).
 
@@ -28,11 +28,11 @@ Responses:
 
 * **200 OK** When the service is ready to receive requests.
 
-### PUT /cars
+### PUT /Cars
 
-Load the list of available cars in the service and remove all previous data (existing journeys and cars). This method may be called more than once during the life cycle of the service.
+Load the list of available Cars in the service and remove all previous data (existing Journeys and Cars). This method may be called more than once during the life cycle of the service.
 
-**Body** _required_ The list of cars to load.
+**Body** _required_ The list of Cars to load.
 
 **Content Type** `application/json`
 
