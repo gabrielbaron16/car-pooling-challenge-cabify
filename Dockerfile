@@ -13,11 +13,12 @@ RUN go mod download
 # Copy the source from the current directory to the Working Directory inside the container
 COPY . .
 
-# Install Swagger
-RUN go install github.com/go-swagger/go-swagger/cmd/swagger@latest
+# Install Swagger using ADD instruction
+ADD https://github.com/go-swagger/go-swagger/releases/download/v0.30.5/swagger_linux_amd64 /usr/local/bin/swagger
+RUN chmod +x /usr/local/bin/swagger
 
 # Generate the server code from the swagger file
-RUN swagger generate server -f ./swagger.yml --exclude-main
+RUN /usr/local/bin/swagger generate server -f ./swagger.yml --exclude-main
 
 # Build the Go app
 RUN go build -o /carpool ./cmd/car-pooling-server
