@@ -7,12 +7,16 @@ stages:
 build:
   stage: build
   image: golang:1.23.4
-  artifacts:
-    paths:
-      - target/bin/car-pooling-server
+  before_script:
+    - apt-get update && apt-get install -y wget
+    - wget https://github.com/go-swagger/go-swagger/releases/download/v0.30.5/swagger_linux_amd64 -O /usr/local/bin/swagger
+    - chmod +x /usr/local/bin/swagger
   script:
     - swagger generate server -f ./swagger.yml --exclude-main
     - make build
+  artifacts:
+    paths:
+      - target/bin/car-pooling-server
 
 dockerize:
   stage: docker
