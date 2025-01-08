@@ -29,7 +29,7 @@ debug:	### Debug Makefile itself
 
 .PHONY: build
 build:
-	CGO_ENABLED=0 go build -a -o target/bin/carpool ./cmd/carpool/main.go
+	CGO_ENABLED=0 go build -a -o target/bin/carpool ./cmd/car-pooling-server/main.go
 
 .PHONY: run
 run: build
