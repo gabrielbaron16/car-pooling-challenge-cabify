@@ -13,6 +13,9 @@ RUN go mod download
 # Copy the source from the current directory to the Working Directory inside the container
 COPY . .
 
+# Install Swagger
+RUN go install github.com/go-swagger/go-swagger/cmd/swagger@latest
+
 # Generate the server code from the swagger file
 RUN swagger generate server -f ./swagger.yml --exclude-main
 
@@ -39,6 +42,7 @@ LABEL BUILD_TAG=$BUILD_TAG
 
 # Copy the Pre-built binary file from the previous stage
 COPY --from=builder /carpool /carpool
+
 
 # The command to run
 CMD ["/carpool"]
