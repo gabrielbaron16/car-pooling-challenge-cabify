@@ -6,7 +6,7 @@ import (
 
 type IJourneyService interface {
 	CreateJourney(journey *model.Journey) error
-	LocateJourney(journeyId uint) (*model.Car, error)
+	LocateJourney(journeyId int64) (*model.Car, error)
 }
 
 var instance IJourneyService

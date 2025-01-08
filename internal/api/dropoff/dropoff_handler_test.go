@@ -43,7 +43,7 @@ var _ = Describe("Dropoff Handler Test Suite", func() {
 
 		It("Response 204 - No Content", func() {
 			carResponse := getCarResponse()
-			mockDropoffService.EXPECT().Dropoff(uint(1)).Return(carResponse, nil)
+			mockDropoffService.EXPECT().Dropoff(int64(1)).Return(carResponse, nil)
 			mockReassignService.EXPECT().Reassign(carResponse).Return(nil)
 			handlerResponse := PostDropoffHandler(operations.PostDropoffJourneyIDParams{
 				HTTPRequest: request,
@@ -53,7 +53,7 @@ var _ = Describe("Dropoff Handler Test Suite", func() {
 		})
 
 		It("Response 404 - Not Found", func() {
-			mockDropoffService.EXPECT().Dropoff(uint(1)).Return(nil, utils.ErrNotFound)
+			mockDropoffService.EXPECT().Dropoff(int64(1)).Return(nil, utils.ErrNotFound)
 			handlerResponse := PostDropoffHandler(operations.PostDropoffJourneyIDParams{
 				HTTPRequest: request,
 				JourneyID:   1,
@@ -62,7 +62,7 @@ var _ = Describe("Dropoff Handler Test Suite", func() {
 		})
 
 		It("Response 500 - Internal Server Error (Error on dropoff process)", func() {
-			mockDropoffService.EXPECT().Dropoff(uint(1)).Return(nil, errors.New("error"))
+			mockDropoffService.EXPECT().Dropoff(int64(1)).Return(nil, errors.New("error"))
 			handlerResponse := PostDropoffHandler(operations.PostDropoffJourneyIDParams{
 				HTTPRequest: request,
 				JourneyID:   1,
@@ -72,7 +72,7 @@ var _ = Describe("Dropoff Handler Test Suite", func() {
 
 		It("Response 500 - Internal Server Error (Error on reassign process)", func() {
 			carResponse := getCarResponse()
-			mockDropoffService.EXPECT().Dropoff(uint(1)).Return(carResponse, nil)
+			mockDropoffService.EXPECT().Dropoff(int64(1)).Return(carResponse, nil)
 			mockReassignService.EXPECT().Reassign(carResponse).Return(errors.New("error"))
 			handlerResponse := PostDropoffHandler(operations.PostDropoffJourneyIDParams{
 				HTTPRequest: request,

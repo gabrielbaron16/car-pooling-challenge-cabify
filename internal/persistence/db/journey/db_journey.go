@@ -5,10 +5,10 @@ import (
 )
 
 type JourneyDbImp struct {
-	Journeys map[uint]*model.Journey
+	Journeys map[int64]*model.Journey
 }
 
-func (c JourneyDbImp) GetJourneyById(journeyID uint) *model.Journey {
+func (c JourneyDbImp) GetJourneyById(journeyID int64) *model.Journey {
 	return c.Journeys[journeyID]
 }
 
@@ -17,9 +17,9 @@ func (c JourneyDbImp) UpsertJourney(journey *model.Journey) {
 }
 
 func (c JourneyDbImp) ResetJourneys() {
-	c.Journeys = make(map[uint]*model.Journey)
+	c.Journeys = make(map[int64]*model.Journey)
 }
 
-func (c JourneyDbImp) RemoveJourney(journeyID uint) {
+func (c JourneyDbImp) RemoveJourney(journeyID int64) {
 	delete(c.Journeys, journeyID)
 }

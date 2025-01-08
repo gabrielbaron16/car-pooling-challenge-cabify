@@ -102,6 +102,9 @@ paths:
 definitions:
   car:
     type: "object"
+    required:
+      - id
+      - seats
     properties:
       id:
         type: "integer"
@@ -114,10 +117,14 @@ definitions:
         maximum: 6
   journey:
     type: "object"
+    required:
+      - id
+      - people
     properties:
       id:
         type: "integer"
         format: "int64"
+        minimum: 0
       people:
         type: "integer"
         format: "int32"

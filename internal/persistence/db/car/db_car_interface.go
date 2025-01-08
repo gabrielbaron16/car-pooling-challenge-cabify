@@ -7,9 +7,9 @@ import (
 var carDAO CarDatabase
 
 type CarDatabase interface {
-	GetCarById(carId uint) *model.Car
+	GetCarById(carId int64) *model.Car
 	UpsertCar(car *model.Car)
-	GetAllCars() map[uint]*model.Car
+	GetAllCars() map[int64]*model.Car
 	ResetCars()
 }
 

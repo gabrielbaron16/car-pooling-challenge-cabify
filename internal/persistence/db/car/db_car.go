@@ -5,10 +5,10 @@ import (
 )
 
 type CarDbImp struct {
-	Cars map[uint]*model.Car
+	Cars map[int64]*model.Car
 }
 
-func (c CarDbImp) GetCarById(carID uint) *model.Car {
+func (c CarDbImp) GetCarById(carID int64) *model.Car {
 	return c.Cars[carID]
 }
 
@@ -16,10 +16,10 @@ func (c CarDbImp) UpsertCar(car *model.Car) {
 	c.Cars[car.ID] = car
 }
 
-func (c CarDbImp) GetAllCars() map[uint]*model.Car {
+func (c CarDbImp) GetAllCars() map[int64]*model.Car {
 	return c.Cars
 }
 
 func (c CarDbImp) ResetCars() {
-	c.Cars = make(map[uint]*model.Car)
+	c.Cars = make(map[int64]*model.Car)
 }

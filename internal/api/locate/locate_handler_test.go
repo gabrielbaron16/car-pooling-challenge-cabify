@@ -40,7 +40,7 @@ var _ = Describe("Locate Journey Handler Test Suite", func() {
 
 		It("Response 200 - OK", func() {
 			carResponse := getCarResponse()
-			mockJourneyService.EXPECT().LocateJourney(uint(1)).Return(carResponse, nil)
+			mockJourneyService.EXPECT().LocateJourney(int64(1)).Return(carResponse, nil)
 			handlerResponse := PostLocateHandler(operations.PostLocateJourneyIDParams{
 				HTTPRequest: request,
 				JourneyID:   1,
@@ -49,7 +49,7 @@ var _ = Describe("Locate Journey Handler Test Suite", func() {
 		})
 
 		It("Response 204 - No Content", func() {
-			mockJourneyService.EXPECT().LocateJourney(uint(1)).Return(nil, nil)
+			mockJourneyService.EXPECT().LocateJourney(int64(1)).Return(nil, nil)
 			handlerResponse := PostLocateHandler(operations.PostLocateJourneyIDParams{
 				HTTPRequest: request,
 				JourneyID:   1,
@@ -58,7 +58,7 @@ var _ = Describe("Locate Journey Handler Test Suite", func() {
 		})
 
 		It("Response 404 - Not Found", func() {
-			mockJourneyService.EXPECT().LocateJourney(uint(1)).Return(nil, utils.ErrNotFound)
+			mockJourneyService.EXPECT().LocateJourney(int64(1)).Return(nil, utils.ErrNotFound)
 			handlerResponse := PostLocateHandler(operations.PostLocateJourneyIDParams{
 				HTTPRequest: request,
 				JourneyID:   1,
@@ -67,7 +67,7 @@ var _ = Describe("Locate Journey Handler Test Suite", func() {
 		})
 
 		It("Response 500 - Internal Server Error", func() {
-			mockJourneyService.EXPECT().LocateJourney(uint(1)).Return(nil, errors.New("error"))
+			mockJourneyService.EXPECT().LocateJourney(int64(1)).Return(nil, errors.New("error"))
 			handlerResponse := PostLocateHandler(operations.PostLocateJourneyIDParams{
 				HTTPRequest: request,
 				JourneyID:   1,

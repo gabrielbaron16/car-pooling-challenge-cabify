@@ -31,7 +31,7 @@ func (s *ReassignService) Reassign(car *model2.Car) error {
 	return nil
 }
 
-func getNextJourney(ids []uint, journeys map[uint]*model2.Journey, availableSeats uint) *model2.Journey {
+func getNextJourney(ids []int64, journeys map[int64]*model2.Journey, availableSeats uint) *model2.Journey {
 	for _, id := range ids {
 		if journeys[id].Passengers <= availableSeats {
 			return journeys[id]

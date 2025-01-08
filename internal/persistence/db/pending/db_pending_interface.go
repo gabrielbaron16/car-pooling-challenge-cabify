@@ -9,7 +9,7 @@ var pendingDAO PendingDatabase
 type PendingDatabase interface {
 	AddPending(pending *model.Journey)
 	ResetPending()
-	RemovePending(journeyID uint)
+	RemovePending(journeyID int64)
 	GetAllPending() *model.PendingOrderedMap
 }
 

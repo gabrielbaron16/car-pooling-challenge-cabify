@@ -7,10 +7,10 @@ import (
 var journeyDAO JourneyDatabase
 
 type JourneyDatabase interface {
-	GetJourneyById(journeyID uint) *model.Journey
+	GetJourneyById(journeyID int64) *model.Journey
 	UpsertJourney(journey *model.Journey)
 	ResetJourneys()
-	RemoveJourney(journeyID uint)
+	RemoveJourney(journeyID int64)
 }
 
 func GetInstance() JourneyDatabase {

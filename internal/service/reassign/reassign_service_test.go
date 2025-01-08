@@ -87,12 +87,12 @@ func getJourney() *model.Journey {
 func getPending() *model.PendingOrderedMap {
 	return &model.PendingOrderedMap{
 		Journeys: getJourneyMap(),
-		Ids:      []uint{1},
+		Ids:      []int64{1},
 	}
 }
 
-func getJourneyMap() map[uint]*model.Journey {
-	return map[uint]*model.Journey{
+func getJourneyMap() map[int64]*model.Journey {
+	return map[int64]*model.Journey{
 		1: {
 			Id:         1,
 			Passengers: 4,

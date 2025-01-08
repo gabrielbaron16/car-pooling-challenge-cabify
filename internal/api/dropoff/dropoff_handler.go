@@ -11,7 +11,7 @@ import (
 
 func PostDropoffHandler(params operations.PostDropoffJourneyIDParams) middleware.Responder {
 
-	car, err := dropoffService.GetInstance().Dropoff(uint(params.JourneyID))
+	car, err := dropoffService.GetInstance().Dropoff(params.JourneyID)
 	if errors.Is(err, utils.ErrNotFound) {
 		return operations.NewPostDropoffJourneyIDNotFound()
 	}

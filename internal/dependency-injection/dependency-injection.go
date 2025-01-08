@@ -26,15 +26,15 @@ func InjectCarpoolServeDependencies() {
 
 	// database
 	car.SetInstance(&car.CarDbImp{
-		Cars: make(map[uint]*model2.Car),
+		Cars: make(map[int64]*model2.Car),
 	})
 	journey.SetInstance(&journey.JourneyDbImp{
-		Journeys: make(map[uint]*model2.Journey),
+		Journeys: make(map[int64]*model2.Journey),
 	})
 	pending.SetInstance(&pending.PendingDbImp{
 		Pending: &model2.PendingOrderedMap{
-			Journeys: map[uint]*model2.Journey{},
-			Ids:      []uint{},
+			Journeys: map[int64]*model2.Journey{},
+			Ids:      []int64{},
 		},
 	})
 }

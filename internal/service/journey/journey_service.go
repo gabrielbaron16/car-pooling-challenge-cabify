@@ -24,7 +24,7 @@ func (s *JourneyService) CreateJourney(journey *model.Journey) error {
 	return nil
 }
 
-func (s *JourneyService) LocateJourney(journeyID uint) (*model.Car, error) {
+func (s *JourneyService) LocateJourney(journeyID int64) (*model.Car, error) {
 	journey := journeyDb.GetInstance().GetJourneyById(journeyID)
 	if journey == nil {
 		return nil, utils.ErrNotFound
@@ -36,7 +36,7 @@ func (s *JourneyService) LocateJourney(journeyID uint) (*model.Car, error) {
 	return car, nil
 }
 
-func (s *JourneyService) assignCar(journey *model.Journey, cars map[uint]*model.Car) {
+func (s *JourneyService) assignCar(journey *model.Journey, cars map[int64]*model.Car) {
 	s.Mu.Lock()
 	carAvailable := getCarAvailable(journey, cars)
 	if carAvailable != nil {
@@ -49,7 +49,7 @@ func (s *JourneyService) assignCar(journey *model.Journey, cars map[uint]*model.
 	defer s.Mu.Unlock()
 }
 
-func getCarAvailable(journey *model.Journey, cars map[uint]*model.Car) *model.Car {
+func getCarAvailable(journey *model.Journey, cars map[int64]*model.Car) *model.Car {
 	var carAvailable *model.Car
 	for _, car := range cars {
 		if journey.Passengers <= car.AvailableSeats {

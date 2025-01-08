@@ -71,8 +71,10 @@ var _ = Describe("Journey Handler Test Suite", func() {
 })
 
 func getPostJourneyBody() *models.Journey {
+	id := int64(1)
+	people := int32(4)
 	return &models.Journey{
-		ID:     1,
-		People: 4,
+		ID:     &id,
+		People: &people,
 	}
 }

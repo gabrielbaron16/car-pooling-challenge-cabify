@@ -14,11 +14,11 @@ func (db PendingDbImp) AddPending(pending *model.Journey) {
 }
 
 func (db PendingDbImp) ResetPending() {
-	db.Pending.Journeys = make(map[uint]*model.Journey)
-	db.Pending.Ids = make([]uint, 0)
+	db.Pending.Journeys = make(map[int64]*model.Journey)
+	db.Pending.Ids = make([]int64, 0)
 }
 
-func (db PendingDbImp) RemovePending(journeyID uint) {
+func (db PendingDbImp) RemovePending(journeyID int64) {
 	delete(db.Pending.Journeys, journeyID)
 	for i, p := range db.Pending.Ids {
 		if p == journeyID {

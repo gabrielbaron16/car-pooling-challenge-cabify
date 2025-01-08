@@ -11,7 +11,7 @@ import (
 
 func PostLocateHandler(params operations.PostLocateJourneyIDParams) middleware.Responder {
 
-	car, err := journeyService.GetInstance().LocateJourney(uint(params.JourneyID))
+	car, err := journeyService.GetInstance().LocateJourney(params.JourneyID)
 	if errors.Is(err, utils.ErrNotFound) {
 		return operations.NewPostLocateJourneyIDNotFound()
 	}

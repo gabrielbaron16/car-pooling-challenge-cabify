@@ -5,7 +5,7 @@ import (
 )
 
 type IDropoffService interface {
-	Dropoff(journeyID uint) (car *model.Car, err error)
+	Dropoff(journeyID int64) (car *model.Car, err error)
 }
 
 var instance IDropoffService

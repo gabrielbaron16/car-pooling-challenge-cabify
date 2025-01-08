@@ -71,14 +71,18 @@ var _ = Describe("Car Handler Test Suite", func() {
 })
 
 func getPutCarsBody() []*models.Car {
+	id1 := int64(1)
+	seats1 := int32(4)
+	id2 := int64(2)
+	seats2 := int32(4)
 	return []*models.Car{
 		{
-			ID:    1,
-			Seats: 4,
+			ID:    &id1,
+			Seats: &seats1,
 		},
 		{
-			ID:    2,
-			Seats: 4,
+			ID:    &id2,
+			Seats: &seats2,
 		},
 	}
 }

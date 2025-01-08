@@ -10,7 +10,7 @@ import (
 
 type DropoffService struct{}
 
-func (s DropoffService) Dropoff(journeyID uint) (car *model.Car, err error) {
+func (s DropoffService) Dropoff(journeyID int64) (car *model.Car, err error) {
 	journey := journeyDb.GetInstance().GetJourneyById(journeyID)
 	if journey == nil {
 		return nil, utils.ErrNotFound
