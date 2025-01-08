@@ -16,7 +16,7 @@ ARG BUILD_TAG=unknown
 LABEL BUILD_TAG=$BUILD_TAG
 
 # Copy the service binary
-COPY target/bin/carpool /carpool
+COPY target/bin/car-pooling-server /carpool
 
 # The command to run
 CMD ["/carpool"]
