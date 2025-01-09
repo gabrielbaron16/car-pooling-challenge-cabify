@@ -5,7 +5,12 @@ FROM golang:1.23.4-alpine AS builder
 RUN apk --update upgrade && apk add --no-cache \
   ca-certificates \
   curl \
-  tzdata
+  tzdata \
+  wget
+
+# Install swagger
+RUN wget https://github.com/go-swagger/go-swagger/releases/download/v0.30.5/swagger_linux_amd64 -O /usr/local/bin/swagger && \
+    chmod +x /usr/local/bin/swagger
 
 # Set the working directory
 WORKDIR /app
@@ -19,6 +24,9 @@ RUN go mod download
 
 # Copy the application code
 COPY . .
+
+# Generate server code using swagger
+RUN swagger generate server -f ./swagger.yml --exclude-main
 
 # Build the application
 RUN CGO_ENABLED=0 go build -a -o target/bin/carpool ./cmd/car-pooling-server/main.go
