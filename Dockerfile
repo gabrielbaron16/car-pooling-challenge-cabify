@@ -18,5 +18,8 @@ LABEL BUILD_TAG=$BUILD_TAG
 # Copy the service binary
 COPY target/bin/carpool /carpool
 
+# Make the service binary executable
+RUN chmod +x /carpool
+
 # The command to run
 CMD ["/carpool"]
