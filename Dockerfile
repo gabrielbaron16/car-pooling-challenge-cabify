@@ -1,25 +1,45 @@
-FROM alpine:latest
+# Use the official Golang image as the build stage
+FROM golang:1.23.4-alpine AS builder
 
-# Get some basic stuff and remove innecessary apk files
-RUN apk --update upgrade && apk add \
+# Install dependencies
+RUN apk --update upgrade && apk add --no-cache \
   ca-certificates \
   curl \
-  tzdata \
-  && update-ca-certificates \
-  && rm -rf /var/cache/apk/*
+  tzdata
 
-# The port your service will listen on
+# Set the working directory
+WORKDIR /app
+
+# Copy Go module files
+COPY go.mod .
+COPY go.sum .
+
+# Download dependencies
+RUN go mod download
+
+# Copy the application code
+COPY . .
+
+# Build the application
+RUN CGO_ENABLED=0 go build -a -o target/bin/carpool ./cmd/car-pooling-server/main.go
+
+# Use a minimal base image for the final image
+FROM alpine:latest
+
+# Install necessary packages
+RUN apk --update upgrade && apk add --no-cache \
+  ca-certificates \
+  tzdata
+
+# Copy the built binary from the builder stage
+COPY --from=builder /app/target/bin/carpool /carpool
+
+# Expose the port your service will listen on
 EXPOSE 8080
 
-# We will mark this image with a configurable tag
+# Set build arguments and labels
 ARG BUILD_TAG=unknown
 LABEL BUILD_TAG=$BUILD_TAG
 
-# Copy the service binary
-COPY target/bin/carpool /carpool
-
-# Make the service binary executable
-RUN chmod +x /carpool
-
-# The command to run
+# Set the command to run the application
 CMD ["/carpool"]
