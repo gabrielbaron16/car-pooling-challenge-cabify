@@ -34,6 +34,10 @@ func configureAPI(api *operations.CarPoolingAPI) http.Handler {
 
 	api.JSONProducer = runtime.JSONProducer()
 
+	api.GetHandler = operations.GetHandlerFunc(func(params operations.GetParams) middleware.Responder {
+		return operations.NewGetStatusOK().WithPayload("status: ok")
+	})
+
 	api.GetStatusHandler = operations.GetStatusHandlerFunc(func(params operations.GetStatusParams) middleware.Responder {
 		return operations.NewGetStatusOK().WithPayload("status: ok")
 	})

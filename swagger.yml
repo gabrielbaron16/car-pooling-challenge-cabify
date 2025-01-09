@@ -7,6 +7,16 @@ basePath: "/"
 schemes:
   - "http"
 paths:
+  /:
+    get:
+      summary: "Health check"
+      description: "Check the health of the service"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: "string"
+            example: '{"status":"ok"}'
   /status:
     get:
       summary: "Get status"
