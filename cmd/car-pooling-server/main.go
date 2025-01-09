@@ -23,6 +23,7 @@ func main() {
 
 	api := operations.NewCarPoolingAPI(swaggerSpec)
 	server := restapi.NewServer(api)
+	server.Port = 9091
 	defer server.Shutdown()
 
 	parser := flags.NewParser(server, flags.Default)
