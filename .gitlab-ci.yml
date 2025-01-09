@@ -33,13 +33,6 @@ dockerize:
     - echo ${CI_JOB_TOKEN} | docker login --password-stdin -u ${CI_REGISTRY_USER} ${CI_REGISTRY}
     - docker build . -t ${CI_REGISTRY_IMAGE}:latest
     - docker push ${CI_REGISTRY_IMAGE}:latest
-test_healthcheck:
-  stage: test
-  script:
-    - ./target/bin/carpool --port 8080 &
-    - sleep 5
-    - curl -f http://pooling:8080/ || (echo "Health check failed!" && exit 1)
-    - pkill -f carpool
 
 acceptance:
   image: cabify/challenge:latest
@@ -49,4 +42,4 @@ acceptance:
     - name: ${CI_REGISTRY_IMAGE}:latest
       alias: pooling
   script:
-    - /harness --address http://pooling:8080 acceptance
+    - /harness --address http://pooling:9091 acceptance

@@ -9,7 +9,7 @@ RUN apk --update upgrade && apk add \
   && rm -rf /var/cache/apk/*
 
 # The port your service will listen on
-EXPOSE 8080
+EXPOSE 9091
 
 # We will mark this image with a configurable tag
 ARG BUILD_TAG=unknown

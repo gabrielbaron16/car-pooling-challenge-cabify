@@ -4,4 +4,4 @@ services:
     image: car-pooling-challenge:latest
   harness:
     image: cabify/challenge:latest
-    command: /harness --address http://pooling:8080 "${CABIFY_CHALLENGE_TESTCASE:-acceptance}"
+    command: /harness --address http://pooling:9091 "${CABIFY_CHALLENGE_TESTCASE:-acceptance}"
