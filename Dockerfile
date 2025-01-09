@@ -8,9 +8,6 @@ RUN apk --update upgrade && apk add \
   && update-ca-certificates \
   && rm -rf /var/cache/apk/*
 
-# The port your service will listen on
-EXPOSE 9091
-
 # We will mark this image with a configurable tag
 ARG BUILD_TAG=unknown
 LABEL BUILD_TAG=$BUILD_TAG
@@ -20,3 +17,6 @@ COPY target/bin/carpool /carpool
 
 # The command to run
 CMD ["/carpool"]
+
+# The port your service will listen on
+EXPOSE 9091
