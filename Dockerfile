@@ -1,5 +1,9 @@
 FROM alpine:latest
 
+WORKDIR /app
+
+COPY . .
+
 # Get some basic stuff and remove innecessary apk files
 RUN apk --update upgrade && apk add \
   ca-certificates \
