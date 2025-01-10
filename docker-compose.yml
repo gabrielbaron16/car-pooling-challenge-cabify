@@ -2,9 +2,15 @@ version: '3'
 services:
   pooling:
     image: car-pooling-challenge:latest
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9091"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
   harness:
     image: cabify/challenge:latest
     depends_on:
       pooling:
         condition: service_healthy
-    command: /harness --address http://pooling:9091 "${CABIFY_CHALLENGE_TESTCASE:-acceptance}"
+    command: sh -c "curl -f http://pooling:9091 && /harness --address http://pooling:9091 ${CABIFY_CHALLENGE_TESTCASE:-acceptance}"
