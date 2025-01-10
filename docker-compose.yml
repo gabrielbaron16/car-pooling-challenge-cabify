@@ -4,4 +4,7 @@ services:
     image: car-pooling-challenge:latest
   harness:
     image: cabify/challenge:latest
+    depends_on:
+      pooling:
+        condition: service_healthy
     command: /harness --address http://pooling:9091 "${CABIFY_CHALLENGE_TESTCASE:-acceptance}"
