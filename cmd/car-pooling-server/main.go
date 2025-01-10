@@ -23,6 +23,7 @@ func main() {
 
 	api := operations.NewCarPoolingAPI(swaggerSpec)
 	server := restapi.NewServer(api)
+	server.Host = "0.0.0.0"
 	server.Port = 9091
 	defer server.Shutdown()
 

@@ -2,6 +2,8 @@ version: '3'
 services:
   pooling:
     image: car-pooling-challenge:latest
+    ports:
+      - "9091:9091"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9091"]
       interval: 30s
