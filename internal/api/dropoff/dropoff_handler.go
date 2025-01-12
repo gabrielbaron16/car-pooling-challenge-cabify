@@ -13,14 +13,14 @@ func PostDropoffHandler(params operations.PostDropoffParams) middleware.Responde
 
 	car, err := dropoffService.GetInstance().Dropoff(params.ID)
 	if errors.Is(err, utils.ErrNotFound) {
-		return operations.NewPostDropoffJourneyIDNotFound()
+		return operations.NewPostDropoffNotFound()
 	}
 	if err != nil {
-		return operations.NewPostDropoffJourneyIDInternalServerError()
+		return operations.NewPostDropoffInternalServerError()
 	}
 	err = reassignService.GetInstance().Reassign(car)
 	if err != nil {
-		return operations.NewPostDropoffJourneyIDInternalServerError()
+		return operations.NewPostDropoffInternalServerError()
 	}
-	return operations.NewPostDropoffJourneyIDNoContent()
+	return operations.NewPostDropoffNoContent()
 }

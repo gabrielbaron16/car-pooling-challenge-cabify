@@ -13,13 +13,13 @@ func PostLocateHandler(params operations.PostLocateParams) middleware.Responder 
 
 	car, err := journeyService.GetInstance().LocateJourney(params.ID)
 	if errors.Is(err, utils.ErrNotFound) {
-		return operations.NewPostLocateJourneyIDNotFound()
+		return operations.NewPostLocateNotFound()
 	}
 	if err != nil {
-		return operations.NewPostLocateJourneyIDInternalServerError()
+		return operations.NewPostLocateInternalServerError()
 	}
 	if car == nil {
-		return operations.NewPostDropoffJourneyIDNoContent()
+		return operations.NewPostLocateNoContent()
 	}
-	return operations.NewPostLocateJourneyIDOK().WithPayload(mapper.MapCarToCarDTO(car))
+	return operations.NewPostLocateOK().WithPayload(mapper.MapCarToCarDTO(car))
 }
