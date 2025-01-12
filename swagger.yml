@@ -31,6 +31,8 @@ paths:
     put:
       summary: "Add cars"
       description: "Add a list of cars"
+      consumes:
+        - application/json
       parameters:
         - in: "body"
           name: "cars"
@@ -51,6 +53,8 @@ paths:
     post:
       summary: "Add a journey"
       description: "Add a new journey"
+      consumes:
+        - application/json
       parameters:
         - in: "body"
           name: "journey"
@@ -69,6 +73,8 @@ paths:
     post:
       summary: "Drop off passengers"
       description: "Drop off passengers from a journey"
+      consumes:
+        - application/x-www-form-urlencoded
       parameters:
         - in: "path"
           name: "journey_id"
@@ -89,6 +95,8 @@ paths:
     post:
       summary: "Locate a journey"
       description: "Locate a car assigned to a journey"
+      consumes:
+        - application/x-www-form-urlencoded
       parameters:
         - in: "path"
           name: "journey_id"

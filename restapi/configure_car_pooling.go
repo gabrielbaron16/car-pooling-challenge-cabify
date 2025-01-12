@@ -32,6 +32,8 @@ func configureAPI(api *operations.CarPoolingAPI) http.Handler {
 
 	api.JSONConsumer = runtime.JSONConsumer()
 
+	api.UrlformConsumer = runtime.DiscardConsumer
+
 	api.JSONProducer = runtime.JSONProducer()
 
 	api.GetHandler = operations.GetHandlerFunc(func(params operations.GetParams) middleware.Responder {
