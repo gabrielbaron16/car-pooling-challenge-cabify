@@ -5,7 +5,7 @@ import (
 )
 
 type IReassignService interface {
-	Reassign(car *model.Car) error
+	Reassign(car *model.Car)
 }
 
 var instance IReassignService

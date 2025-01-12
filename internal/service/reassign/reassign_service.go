@@ -13,9 +13,8 @@ type ReassignService struct {
 	Mu sync.Mutex
 }
 
-func (s *ReassignService) Reassign(car *model2.Car) error {
+func (s *ReassignService) Reassign(car *model2.Car) {
 	s.Mu.Lock()
-	defer s.Mu.Unlock()
 
 	pending := pendingDb.GetInstance().GetAllPending()
 	nextJourney := getNextJourney(pending.Ids, pending.Journeys, car.AvailableSeats)
@@ -28,7 +27,7 @@ func (s *ReassignService) Reassign(car *model2.Car) error {
 		carDb.GetInstance().UpsertCar(car)
 		pendingDb.GetInstance().RemovePending(nextJourney.Id)
 	}
-	return nil
+	defer s.Mu.Unlock()
 }
 
 func getNextJourney(ids []int64, journeys map[int64]*model2.Journey, availableSeats uint) *model2.Journey {

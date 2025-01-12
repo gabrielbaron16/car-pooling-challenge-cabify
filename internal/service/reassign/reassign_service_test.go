@@ -77,13 +77,6 @@ func getCar() *model.Car {
 	}
 }
 
-func getJourney() *model.Journey {
-	return &model.Journey{
-		Id:         1,
-		Passengers: 4,
-	}
-}
-
 func getPending() *model.PendingOrderedMap {
 	return &model.PendingOrderedMap{
 		Journeys: getJourneyMap(),

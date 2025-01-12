@@ -44,7 +44,7 @@ var _ = Describe("Dropoff Handler Test Suite", func() {
 		It("Response 204 - No Content", func() {
 			carResponse := getCarResponse()
 			mockDropoffService.EXPECT().Dropoff(int64(1)).Return(carResponse, nil)
-			mockReassignService.EXPECT().Reassign(carResponse).Return(nil)
+			mockReassignService.EXPECT().Reassign(carResponse).Times(1)
 			handlerResponse := PostDropoffHandler(operations.PostDropoffParams{
 				HTTPRequest: request,
 				ID:          1,
@@ -63,17 +63,6 @@ var _ = Describe("Dropoff Handler Test Suite", func() {
 
 		It("Response 500 - Internal Server Error (Error on dropoff process)", func() {
 			mockDropoffService.EXPECT().Dropoff(int64(1)).Return(nil, errors.New("error"))
-			handlerResponse := PostDropoffHandler(operations.PostDropoffParams{
-				HTTPRequest: request,
-				ID:          1,
-			})
-			Expect(handlerResponse).To(BeEquivalentTo(operations.NewPostDropoffInternalServerError()))
-		})
-
-		It("Response 500 - Internal Server Error (Error on reassign process)", func() {
-			carResponse := getCarResponse()
-			mockDropoffService.EXPECT().Dropoff(int64(1)).Return(carResponse, nil)
-			mockReassignService.EXPECT().Reassign(carResponse).Return(errors.New("error"))
 			handlerResponse := PostDropoffHandler(operations.PostDropoffParams{
 				HTTPRequest: request,
 				ID:          1,

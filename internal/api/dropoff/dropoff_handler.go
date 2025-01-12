@@ -18,9 +18,6 @@ func PostDropoffHandler(params operations.PostDropoffParams) middleware.Responde
 	if err != nil {
 		return operations.NewPostDropoffInternalServerError()
 	}
-	err = reassignService.GetInstance().Reassign(car)
-	if err != nil {
-		return operations.NewPostDropoffInternalServerError()
-	}
+	reassignService.GetInstance().Reassign(car)
 	return operations.NewPostDropoffNoContent()
 }
