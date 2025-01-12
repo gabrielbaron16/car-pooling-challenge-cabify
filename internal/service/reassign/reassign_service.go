@@ -15,17 +15,18 @@ type ReassignService struct {
 
 func (s *ReassignService) Reassign(car *model2.Car) {
 	s.Mu.Lock()
-
-	pending := pendingDb.GetInstance().GetAllPending()
-	nextJourney := getNextJourney(pending.Ids, pending.Journeys, car.AvailableSeats)
-	if nextJourney != nil {
-		fmt.Printf(">> Car %d reassigned to journey %d\n", car.Id, nextJourney.Id)
-		pending.Journeys[nextJourney.Id].AssignedTo = car
-		updatedJourney := pending.Journeys[nextJourney.Id]
-		car.AvailableSeats -= pending.Journeys[nextJourney.Id].Passengers
-		journeyDb.GetInstance().UpsertJourney(updatedJourney)
-		carDb.GetInstance().UpsertCar(car)
-		pendingDb.GetInstance().RemovePending(nextJourney.Id)
+	if car != nil {
+		pending := pendingDb.GetInstance().GetAllPending()
+		nextJourney := getNextJourney(pending.Ids, pending.Journeys, car.AvailableSeats)
+		if nextJourney != nil {
+			fmt.Printf(">> Car %d reassigned to journey %d\n", car.Id, nextJourney.Id)
+			pending.Journeys[nextJourney.Id].AssignedTo = car
+			updatedJourney := pending.Journeys[nextJourney.Id]
+			car.AvailableSeats -= pending.Journeys[nextJourney.Id].Passengers
+			journeyDb.GetInstance().UpsertJourney(updatedJourney)
+			carDb.GetInstance().UpsertCar(car)
+			pendingDb.GetInstance().RemovePending(nextJourney.Id)
+		}
 	}
 	defer s.Mu.Unlock()
 }

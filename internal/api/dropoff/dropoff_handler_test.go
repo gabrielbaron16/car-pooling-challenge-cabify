@@ -52,6 +52,15 @@ var _ = Describe("Dropoff Handler Test Suite", func() {
 			Expect(handlerResponse).To(BeEquivalentTo(operations.NewPostDropoffNoContent()))
 		})
 
+		It("Response 204 (Journey without car) - No Content", func() {
+			mockDropoffService.EXPECT().Dropoff(int64(1)).Return(nil, nil)
+			handlerResponse := PostDropoffHandler(operations.PostDropoffParams{
+				HTTPRequest: request,
+				ID:          1,
+			})
+			Expect(handlerResponse).To(BeEquivalentTo(operations.NewPostDropoffNoContent()))
+		})
+
 		It("Response 404 - Not Found", func() {
 			mockDropoffService.EXPECT().Dropoff(int64(1)).Return(nil, utils.ErrNotFound)
 			handlerResponse := PostDropoffHandler(operations.PostDropoffParams{
