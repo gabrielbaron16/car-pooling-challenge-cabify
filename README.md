@@ -109,3 +109,19 @@ Responses:
 * **204 No Content** When the group is waiting to be assigned to a car.
 * **404 Not Found** When the group is not to be found.
 * **400 Bad Request** When there is a failure in the request format or the payload can't be unmarshalled.
+
+## Unit Tests
+
+To run the tests, is necessary to generate the mocks, we use the mockgen tool from the gomock package. Follow these steps to generate the mocks:  
+Install mockgen: If you haven't already installed mockgen, you can do so by running:  
+go install github.com/golang/mock/mockgen@v1.6.0
+
+Generate Mocks:
+
+* mockgen -package mocks -source internal/service/car/car_service_interface.go -destination mocks/car_service_interface.go
+* mockgen -package mocks -source internal/service/journey/journey_service_interface.go -destination mocks/journey_service_interface.go
+* mockgen -package mocks -source internal/service/reassign/reassign_service_interface.go -destination mocks/reassign_service_interface.go
+* mockgen -package mocks -source internal/service/dropoff/dropoff_service_interface.go -destination mocks/dropoff_service_interface.go
+* mockgen -package mocks -source internal/persistence/db/car/db_car_interface.go -destination mocks/db_car_interface.go
+* mockgen -package mocks -source internal/persistence/db/journey/db_journey_interface.go -destination mocks/db_journey_interface.go
+* mockgen -package mocks -source internal/persistence/db/pending/db_pending_interface.go -destination mocks/db_pending_interface.go
