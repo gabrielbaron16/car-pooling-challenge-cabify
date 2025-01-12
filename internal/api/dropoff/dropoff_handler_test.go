@@ -45,40 +45,40 @@ var _ = Describe("Dropoff Handler Test Suite", func() {
 			carResponse := getCarResponse()
 			mockDropoffService.EXPECT().Dropoff(int64(1)).Return(carResponse, nil)
 			mockReassignService.EXPECT().Reassign(carResponse).Return(nil)
-			handlerResponse := PostDropoffHandler(operations.PostDropoffJourneyIDParams{
+			handlerResponse := PostDropoffHandler(operations.PostDropoffParams{
 				HTTPRequest: request,
-				JourneyID:   1,
+				ID:          1,
 			})
-			Expect(handlerResponse).To(BeEquivalentTo(operations.NewPostDropoffJourneyIDNoContent()))
+			Expect(handlerResponse).To(BeEquivalentTo(operations.NewPostDropoffNoContent()))
 		})
 
 		It("Response 404 - Not Found", func() {
 			mockDropoffService.EXPECT().Dropoff(int64(1)).Return(nil, utils.ErrNotFound)
-			handlerResponse := PostDropoffHandler(operations.PostDropoffJourneyIDParams{
+			handlerResponse := PostDropoffHandler(operations.PostDropoffParams{
 				HTTPRequest: request,
-				JourneyID:   1,
+				ID:          1,
 			})
-			Expect(handlerResponse).To(BeEquivalentTo(operations.NewPostDropoffJourneyIDNotFound()))
+			Expect(handlerResponse).To(BeEquivalentTo(operations.NewPostDropoffNotFound()))
 		})
 
 		It("Response 500 - Internal Server Error (Error on dropoff process)", func() {
 			mockDropoffService.EXPECT().Dropoff(int64(1)).Return(nil, errors.New("error"))
-			handlerResponse := PostDropoffHandler(operations.PostDropoffJourneyIDParams{
+			handlerResponse := PostDropoffHandler(operations.PostDropoffParams{
 				HTTPRequest: request,
-				JourneyID:   1,
+				ID:          1,
 			})
-			Expect(handlerResponse).To(BeEquivalentTo(operations.NewPostDropoffJourneyIDInternalServerError()))
+			Expect(handlerResponse).To(BeEquivalentTo(operations.NewPostDropoffInternalServerError()))
 		})
 
 		It("Response 500 - Internal Server Error (Error on reassign process)", func() {
 			carResponse := getCarResponse()
 			mockDropoffService.EXPECT().Dropoff(int64(1)).Return(carResponse, nil)
 			mockReassignService.EXPECT().Reassign(carResponse).Return(errors.New("error"))
-			handlerResponse := PostDropoffHandler(operations.PostDropoffJourneyIDParams{
+			handlerResponse := PostDropoffHandler(operations.PostDropoffParams{
 				HTTPRequest: request,
-				JourneyID:   1,
+				ID:          1,
 			})
-			Expect(handlerResponse).To(BeEquivalentTo(operations.NewPostDropoffJourneyIDInternalServerError()))
+			Expect(handlerResponse).To(BeEquivalentTo(operations.NewPostDropoffInternalServerError()))
 		})
 	})
 })

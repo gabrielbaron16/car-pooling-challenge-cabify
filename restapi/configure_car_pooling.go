@@ -36,10 +36,6 @@ func configureAPI(api *operations.CarPoolingAPI) http.Handler {
 
 	api.JSONProducer = runtime.JSONProducer()
 
-	api.GetHandler = operations.GetHandlerFunc(func(params operations.GetParams) middleware.Responder {
-		return operations.NewGetStatusOK().WithPayload("status: ok")
-	})
-
 	api.GetStatusHandler = operations.GetStatusHandlerFunc(func(params operations.GetStatusParams) middleware.Responder {
 		return operations.NewGetStatusOK().WithPayload("status: ok")
 	})
@@ -52,11 +48,11 @@ func configureAPI(api *operations.CarPoolingAPI) http.Handler {
 		return journey.PostJourneyHandler(params)
 	})
 
-	api.PostLocateJourneyIDHandler = operations.PostLocateJourneyIDHandlerFunc(func(params operations.PostLocateJourneyIDParams) middleware.Responder {
+	api.PostLocateHandler = operations.PostLocateHandlerFunc(func(params operations.PostLocateParams) middleware.Responder {
 		return locate.PostLocateHandler(params)
 	})
 
-	api.PostDropoffJourneyIDHandler = operations.PostDropoffJourneyIDHandlerFunc(func(params operations.PostDropoffJourneyIDParams) middleware.Responder {
+	api.PostDropoffHandler = operations.PostDropoffHandlerFunc(func(params operations.PostDropoffParams) middleware.Responder {
 		return dropoff.PostDropoffHandler(params)
 	})
 

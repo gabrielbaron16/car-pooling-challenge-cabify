@@ -9,9 +9,9 @@ import (
 	"gitlab-hiring.cabify.tech/cabify/interviewing/car-pooling-challenge-go/restapi/operations"
 )
 
-func PostDropoffHandler(params operations.PostDropoffJourneyIDParams) middleware.Responder {
+func PostDropoffHandler(params operations.PostDropoffParams) middleware.Responder {
 
-	car, err := dropoffService.GetInstance().Dropoff(params.JourneyID)
+	car, err := dropoffService.GetInstance().Dropoff(params.ID)
 	if errors.Is(err, utils.ErrNotFound) {
 		return operations.NewPostDropoffJourneyIDNotFound()
 	}

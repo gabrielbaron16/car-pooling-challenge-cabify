@@ -7,16 +7,6 @@ basePath: "/"
 schemes:
   - "http"
 paths:
-  /:
-    get:
-      summary: "Health check"
-      description: "Check the health of the service"
-      responses:
-        200:
-          description: "OK"
-          schema:
-            type: "string"
-            example: '{"status":"ok"}'
   /status:
     get:
       summary: "Get status"
@@ -69,16 +59,16 @@ paths:
           description: "Bad Request"
         500:
           description: "Failure in the request format or the payload can't be unmarshalled"
-  /dropoff/{journey_id}:
+  /dropoff:
     post:
       summary: "Drop off passengers"
       description: "Drop off passengers from a journey"
       consumes:
         - application/x-www-form-urlencoded
       parameters:
-        - in: "path"
-          name: "journey_id"
-          description: "Journey ID"
+        - in: "formData"
+          name: "ID"
+          description: "Group ID"
           required: true
           type: "integer"
           format: "int64"
@@ -91,16 +81,16 @@ paths:
           description: "Not Found"
         500:
           description: "Internal Server Error"
-  /locate/{journey_id}:
+  /locate:
     post:
       summary: "Locate a journey"
       description: "Locate a car assigned to a journey"
       consumes:
         - application/x-www-form-urlencoded
       parameters:
-        - in: "path"
-          name: "journey_id"
-          description: "Journey ID"
+        - in: "formData"
+          name: "ID"
+          description: "Group ID"
           required: true
           type: "integer"
           format: "int64"

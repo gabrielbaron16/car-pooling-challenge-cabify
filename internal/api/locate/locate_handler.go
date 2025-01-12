@@ -9,9 +9,9 @@ import (
 	"gitlab-hiring.cabify.tech/cabify/interviewing/car-pooling-challenge-go/restapi/operations"
 )
 
-func PostLocateHandler(params operations.PostLocateJourneyIDParams) middleware.Responder {
+func PostLocateHandler(params operations.PostLocateParams) middleware.Responder {
 
-	car, err := journeyService.GetInstance().LocateJourney(params.JourneyID)
+	car, err := journeyService.GetInstance().LocateJourney(params.ID)
 	if errors.Is(err, utils.ErrNotFound) {
 		return operations.NewPostLocateJourneyIDNotFound()
 	}
