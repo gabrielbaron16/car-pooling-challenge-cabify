@@ -54,8 +54,7 @@ var _ = Describe("Reassign Service Test Suite", func() {
 			mockCarDb.EXPECT().UpsertCar(car).Times(1)
 			mockPendingDb.EXPECT().RemovePending(updatedJourney.Id).Times(1)
 			carToReassign := getCar()
-			err := GetInstance().Reassign(carToReassign)
-			Expect(err).To(BeNil())
+			GetInstance().Reassign(carToReassign)
 		})
 
 		It("Result Successfully - Car Not Reassigned", func() {
@@ -63,8 +62,7 @@ var _ = Describe("Reassign Service Test Suite", func() {
 			pending := getPending()
 			pending.Journeys[1].Passengers = 5
 			mockPendingDb.EXPECT().GetAllPending().Return(pending)
-			err := GetInstance().Reassign(car)
-			Expect(err).To(BeNil())
+			GetInstance().Reassign(car)
 		})
 	})
 })
