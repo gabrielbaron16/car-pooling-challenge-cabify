@@ -18,10 +18,10 @@ func MapCarsDTOToCars(cars []*models.Car) []*model.Car {
 }
 
 func MapCarToCarDTO(car *model.Car) *models.Car {
-	availableSeats := int32(car.AvailableSeats)
+	seats := int32(car.MaxSeats)
 	return &models.Car{
 		ID:    &car.ID,
-		Seats: &availableSeats,
+		Seats: &seats,
 	}
 }
 
