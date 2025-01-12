@@ -19,7 +19,7 @@ func (s *ReassignService) Reassign(car *model2.Car) {
 	pending := pendingDb.GetInstance().GetAllPending()
 	nextJourney := getNextJourney(pending.Ids, pending.Journeys, car.AvailableSeats)
 	if nextJourney != nil {
-		fmt.Printf(">> Car %d reassigned to journey %d\n", car.ID, nextJourney.Id)
+		fmt.Printf(">> Car %d reassigned to journey %d\n", car.Id, nextJourney.Id)
 		pending.Journeys[nextJourney.Id].AssignedTo = car
 		updatedJourney := pending.Journeys[nextJourney.Id]
 		car.AvailableSeats -= pending.Journeys[nextJourney.Id].Passengers

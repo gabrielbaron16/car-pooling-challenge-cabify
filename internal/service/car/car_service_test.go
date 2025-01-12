@@ -46,7 +46,7 @@ var _ = Describe("Car Service Test Suite", func() {
 			mockCarDb.EXPECT().ResetCars().Times(1)
 			mockJourneyDb.EXPECT().ResetJourneys().Times(1)
 			mockPendingDb.EXPECT().ResetPending().Times(1)
-			mockCarDb.EXPECT().GetCarById(cars[0].ID).Return(nil)
+			mockCarDb.EXPECT().GetCarById(cars[0].Id).Return(nil)
 			mockCarDb.EXPECT().UpsertCar(cars[0]).Times(1)
 			err := GetInstance().ResetCars(cars)
 			Expect(err).To(BeNil())
@@ -57,9 +57,9 @@ var _ = Describe("Car Service Test Suite", func() {
 			mockCarDb.EXPECT().ResetCars().Times(2)
 			mockJourneyDb.EXPECT().ResetJourneys().Times(1)
 			mockPendingDb.EXPECT().ResetPending().Times(1)
-			mockCarDb.EXPECT().GetCarById(cars[0].ID).Return(nil)
+			mockCarDb.EXPECT().GetCarById(cars[0].Id).Return(nil)
 			mockCarDb.EXPECT().UpsertCar(cars[0]).Times(1)
-			mockCarDb.EXPECT().GetCarById(cars[1].ID).Return(cars[0])
+			mockCarDb.EXPECT().GetCarById(cars[1].Id).Return(cars[0])
 			err := GetInstance().ResetCars(cars)
 			Expect(err).To(Equal(utils.ErrDuplicatedID))
 		})
@@ -69,7 +69,7 @@ var _ = Describe("Car Service Test Suite", func() {
 func getCarsArray() []*model.Car {
 	return []*model.Car{
 		{
-			ID:             1,
+			Id:             1,
 			AvailableSeats: 4,
 			MaxSeats:       4,
 		},
@@ -79,12 +79,12 @@ func getCarsArray() []*model.Car {
 func getCarsArrayDuplicated() []*model.Car {
 	return []*model.Car{
 		{
-			ID:             1,
+			Id:             1,
 			AvailableSeats: 4,
 			MaxSeats:       4,
 		},
 		{
-			ID:             1,
+			Id:             1,
 			AvailableSeats: 6,
 			MaxSeats:       6,
 		},

@@ -69,7 +69,7 @@ var _ = Describe("Reassign Service Test Suite", func() {
 
 func getCar() *model.Car {
 	return &model.Car{
-		ID:             1,
+		Id:             1,
 		AvailableSeats: 4,
 		MaxSeats:       4,
 	}

@@ -113,7 +113,7 @@ var _ = Describe("Journey Service Test Suite", func() {
 func getCarsMap() map[int64]*model.Car {
 	return map[int64]*model.Car{
 		1: {
-			ID:             1,
+			Id:             1,
 			AvailableSeats: 4,
 			MaxSeats:       4,
 		},
@@ -122,7 +122,7 @@ func getCarsMap() map[int64]*model.Car {
 
 func getCar() *model.Car {
 	return &model.Car{
-		ID:             1,
+		Id:             1,
 		AvailableSeats: 4,
 		MaxSeats:       4,
 	}

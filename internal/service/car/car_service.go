@@ -15,7 +15,7 @@ func (s CarService) ResetCars(cars []*model.Car) error {
 	journeyDb.GetInstance().ResetJourneys()
 	pendingDb.GetInstance().ResetPending()
 	for _, car := range cars {
-		consultedCar := carDb.GetInstance().GetCarById(car.ID)
+		consultedCar := carDb.GetInstance().GetCarById(car.Id)
 		if consultedCar != nil {
 			carDb.GetInstance().ResetCars()
 			return utils.ErrDuplicatedID

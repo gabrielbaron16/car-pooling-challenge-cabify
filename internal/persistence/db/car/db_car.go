@@ -13,7 +13,7 @@ func (c CarDbImp) GetCarById(carID int64) *model.Car {
 }
 
 func (c CarDbImp) UpsertCar(car *model.Car) {
-	c.Cars[car.ID] = car
+	c.Cars[car.Id] = car
 }
 
 func (c CarDbImp) GetAllCars() map[int64]*model.Car {

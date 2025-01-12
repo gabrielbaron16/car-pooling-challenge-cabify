@@ -9,7 +9,7 @@ func MapCarsDTOToCars(cars []*models.Car) []*model.Car {
 	var result []*model.Car
 	for _, car := range cars {
 		result = append(result, &model.Car{
-			ID:             *car.ID,
+			Id:             *car.ID,
 			MaxSeats:       uint(*car.Seats),
 			AvailableSeats: uint(*car.Seats),
 		})
@@ -20,7 +20,7 @@ func MapCarsDTOToCars(cars []*models.Car) []*model.Car {
 func MapCarToCarDTO(car *model.Car) *models.Car {
 	seats := int32(car.MaxSeats)
 	return &models.Car{
-		ID:    &car.ID,
+		ID:    &car.Id,
 		Seats: &seats,
 	}
 }
