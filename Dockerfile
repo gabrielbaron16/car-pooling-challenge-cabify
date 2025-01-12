@@ -20,7 +20,7 @@ LABEL BUILD_TAG=$BUILD_TAG
 COPY target/bin/carpool /carpool
 
 # The command to run
-CMD ["/carpool"]
+CMD ["/carpool", "--host", "0.0.0.0"]
 
 # The port your service will listen on
 EXPOSE 9091
