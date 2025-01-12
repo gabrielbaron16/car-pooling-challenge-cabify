@@ -51,6 +51,14 @@ func (s *JourneyService) assignCar(journey *model.Journey, cars map[int64]*model
 
 func getCarAvailable(journey *model.Journey, cars map[int64]*model.Car) *model.Car {
 	var carAvailable *model.Car
+	if journey.Passengers <= 4 {
+		for _, car := range cars {
+			if car.AvailableSeats == 4 {
+				carAvailable = car
+				return carAvailable
+			}
+		}
+	}
 	for _, car := range cars {
 		if journey.Passengers <= car.AvailableSeats {
 			carAvailable = car
