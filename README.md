@@ -110,6 +110,18 @@ Responses:
 * **404 Not Found** When the group is not to be found.
 * **400 Bad Request** When there is a failure in the request format or the payload can't be unmarshalled.
 
+## Swagger generation
+
+To generate the swagger documentation, install go-swagger:
+
+* apt-get update && apt-get install -y wget
+* wget https://github.com/go-swagger/go-swagger/releases/download/v0.30.5/swagger_linux_amd64 -O /usr/local/bin/swagger
+* chmod +x /usr/local/bin/swagger
+
+Then, run the following command:
+
+* swagger generate server -f ./swagger.yml --exclude-main
+
 ## Unit Tests
 
 To run the tests, is necessary to generate the mocks, we use the mockgen tool from the gomock package. Follow these steps to generate the mocks:  

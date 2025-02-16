@@ -15,11 +15,11 @@ import (
 func InjectCarpoolServeDependencies() {
 
 	// service
-	carService.SetInstance(carService.CarService{})
+	carService.SetInstance(&carService.CarService{})
 	journeyService.SetInstance(&journeyService.JourneyService{
 		Mu: sync.Mutex{},
 	})
-	dropoffService.SetInstance(dropoffService.DropoffService{})
+	dropoffService.SetInstance(&dropoffService.DropoffService{})
 	reassignService.SetInstance(&reassignService.ReassignService{
 		Mu: sync.Mutex{},
 	})
